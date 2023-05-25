@@ -1,0 +1,42 @@
+<div class="task-box" (click)="selectTaskHandler()">
+  <label nz-checkbox [nzChecked]="taskItem.completed"
+         (change)="changeTaskStatusHandler()"></label>
+  <div class="task-info-box">
+    <div class="title" [ngClass]="{completed: taskItem.completed}">{{taskItem.title}}</div>
+    <div class="task-info-box-data">
+
+      <span class="cat">{{taskItem.category?.title}}</span>
+
+      <span class="point" *ngIf="taskItem.steps.length > 0"></span>
+      <span class="task-date" *ngIf="taskItem.steps.length > 0">
+        {{completedStepsLength}}
+        из
+        {{taskItem.steps.length}}
+      </span>
+
+      <span class="point" *ngIf="taskItem.completionDate"></span>
+      <span *ngIf="taskItem.completionDate" class="task-date">
+        <span style="font-size: 12px;" nz-icon nzType="calendar" nzTheme="outline"></span>
+        <span style="margin-left: 6px;">{{taskItem.completionDate | taskDate}}</span>
+      </span>
+
+      <span class="point" *ngIf="taskItem.colorCategory.length > 0"></span>
+      <ng-container *ngIf="taskItem.colorCategory.length > 0">
+        <span *ngFor="let colorCat of taskItem.colorCategory" class="task-category">
+            <span class="circle" [style.background-color]="colorCat.color"
+                  [style.border-color]="colorCat.border"
+                  style="border-width: 1px;"
+            ></span>
+          <span class="color-title" [style.color]="colorCat.border">{{colorCat.title}}</span>
+        </span>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <span class="icon-star" nz-icon nzType="star" [style.font-size]="'20px'"
+        [style.color]="activeThemeColor.color"
+        [nzTheme]="taskItem.priority ? 'outline' : 'fill'"
+        (click)="changeTaskPriorityHandler()"></span>
+</div>

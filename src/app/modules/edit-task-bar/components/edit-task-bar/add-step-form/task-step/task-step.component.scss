@@ -1,0 +1,32 @@
+@import '../../../../../../core/scss/variables';
+
+.step {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  width: 100%;
+  padding: 16px;
+  background-color: $main-white-color;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid #e1dfdd;
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 16px;
+    width: 100%;
+    color: $secondary-color;
+    cursor: text;
+
+
+    .input {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+.completed {
+  text-decoration: line-through;
+}

@@ -1,0 +1,49 @@
+@import '../../../../../core/scss/_variables';
+
+
+.category-box {
+  position: relative;
+
+  &.active:before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: $main-blue-color;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all .3s ease;
+  }
+}
+
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  padding: 12px 24px;
+  cursor: pointer;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .title {
+    margin-left: 16px;
+  }
+
+  .count-uncompleted {
+    margin-left: auto;
+  }
+}
+
+.active {
+  background-color: $active-bg-blue;
+  font-weight: 600;
+}
+
+.hovered {
+  background-color: $hover-bg-color;
+}

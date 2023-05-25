@@ -1,0 +1,21 @@
+<div class="add-task-container" [style.color]="activeThemeColor.color">
+  <div class="input-wrapper" (click)="toggleEditMode()">
+    <div *ngIf="!isEditMode">Добавить задачу</div>
+    <input *ngIf="isEditMode" class="input"
+           placeholder="Добавить задачу"
+           [(ngModel)]="tmpTitle"
+           [appAutofocus]="isEditMode"
+           (blur)="toggleEditMode(); $event.stopPropagation()"
+           (keyup.enter)="addTaskHandler()"
+    />
+  </div>
+  <div class="settings">
+    <span nz-tooltip nzTooltipTitle="Добавить дату выполнения">
+      <span nz-icon nzType="calendar" nzTheme="outline" style="font-size: 18px;color: #797775"></span>
+    </span>
+    <button [disabled]="!tmpTitle?.trim()" class="button" nz-button nzType="primary"
+            (click)="addTaskHandler(); $event.stopPropagation()">
+      Добавить
+    </button>
+  </div>
+</div>

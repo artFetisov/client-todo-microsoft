@@ -1,0 +1,13 @@
+<li
+  class="category-box"
+  [ngClass]="{active: category?.id === activeCategory?.id,
+        hovered: (category?.id === hoveredCategory?.id && hoveredCategory?.id !== activeCategory.id)}"
+  (mouseenter)="hoverEnterCategoryHandler(category)"
+  (mouseleave)="hoverLeaveCategoryHandler()"
+  (click)="setActiveCategoryHandler(category)">
+  <div class="category">
+    <span style="font-size: 16px;" nz-icon nzType="menu" nzTheme="outline"></span>
+    <span class="title">{{category.title}}</span>
+    <span class="count-uncompleted">{{countUncompletedTasks}}</span>
+  </div>
+</li>

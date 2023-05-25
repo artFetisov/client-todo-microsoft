@@ -1,0 +1,96 @@
+@import '../../../../../core/scss/_variables';
+
+.tasks-bar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+
+  .tasks-bar-headline {
+    display: flex;
+    align-items: center;
+
+    .title-box {
+      padding: 2px 12px;
+
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+
+  }
+
+  .tasks-bar-right {
+    display: flex;
+    align-items: center;
+    padding: 2px 12px;
+    cursor: pointer;
+
+    .title {
+      margin-left: 4px;
+    }
+  }
+}
+
+
+.input {
+  border: none !important;
+  outline: none !important;
+  font-size: 20px;
+  font-weight: 600;
+  color: $secondary-color;
+  width: 100px;
+}
+
+.delete {
+  color: red;
+}
+
+.params-title {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  padding: 8px 40px;
+}
+
+.param-item {
+  width: 100%;
+  padding: 10px 24px 10px 12px;
+}
+
+
+.theme-circle-wrapper {
+  padding: 16px;
+
+  .theme-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.sort-title-wrapper {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: right;
+
+  .title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 6px;
+  }
+}
+
+
+

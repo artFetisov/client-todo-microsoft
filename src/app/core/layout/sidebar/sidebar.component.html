@@ -1,0 +1,10 @@
+<div class="sidebar" [ngClass]="{hide: !isShowLeftSideBar}">
+  <div class="side-header">
+    <span (click)="toggleShowLeftSideBarHandler()"
+          nz-icon nzType="menu" nzTheme="outline"
+          style="font-size: 16px;cursor: pointer;"></span>
+  </div>
+  <div *ngIf="!isShowLeftSideBar">show</div>
+  <app-categories></app-categories>
+</div>
+

@@ -1,0 +1,40 @@
+<div class="edit-task-bar-wrapper">
+  <div class="edit-task-bar" *ngIf="selectedTask && selectedTask.title">
+    <div class="edit-task-without-footer">
+      <app-edit-bar-head [selectedTask]="selectedTask" [tmpTitle]="tmpTitle"
+                         (changeTaskEvent)="changeTask($event)"
+                         [activeThemeColor]="$any(activeThemeColor$ | async)"
+      >
+
+      </app-edit-bar-head>
+
+      <app-add-step-form [selectedTask]="selectedTask" (addStepEvent)="addStep($event)"
+                         [activeThemeColor]="$any(activeThemeColor$ | async)"
+      >
+      </app-add-step-form>
+
+      <app-edit-date [selectedTask]="selectedTask" (changeDateEvent)="changeTask($event)">
+      </app-edit-date>
+
+      <app-edit-category [activeCategory]="$any(activeCategory$ | async)"
+                         [selectedTask]="selectedTask"
+                         [categories]="$any(categories$ | async)"
+                         (changeCategoryEvent)="changeTaskCategory($event)">
+      </app-edit-category>
+
+      <app-edit-color-category
+        [selectedTask]="selectedTask"
+        (changeColorCategoryEvent)="changeColorCategory($event)"
+        (deleteColorCategoryEvent)="deleteColorCategory($event)"
+      >
+      </app-edit-color-category>
+    </div>
+
+
+    <app-edit-bar-footer [selectedTask]="selectedTask"
+                         (deleteTaskEvent)="deleteTask()"
+    >
+    </app-edit-bar-footer>
+  </div>
+
+</div>

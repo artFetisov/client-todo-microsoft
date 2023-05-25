@@ -1,0 +1,22 @@
+<div class="edit-bar-head">
+  <label style="width: 20px; height: 20px" nz-checkbox
+         (change)="changeTaskStatusHandler()"
+         [nzChecked]="selectedTask.completed"></label>
+  <div class="detail-box" (click)="toggleEditMode()">
+    <div class="editable-content" [ngClass]="{completed: selectedTask.completed}">
+        <span *ngIf="!isEditMode">
+          {{selectedTask.title}}
+        </span>
+      <input class="input" *ngIf="isEditMode" [(ngModel)]="tmpTitle"
+             [appAutofocus]="isEditMode"
+             (blur)="changeTaskTitleHandler()"
+             (keyup.enter)="changeTaskTitleHandler()"/>
+    </div>
+  </div>
+  <span nz-tooltip="delete task" nzTooltipTitle="Пометка задачи как важной">
+     <span nz-icon nzType="star" style="font-size: 20px; cursor: pointer;"
+           [style.color]="activeThemeColor.color"
+           [nzTheme]="selectedTask.priority ? 'outline' : 'fill'"
+           (click)="changeTaskPriorityHandler()"></span>
+  </span>
+</div>

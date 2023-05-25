@@ -1,0 +1,17 @@
+<div class="add-step-form" (click)="toggleEditMode()">
+  <div class="add-step-box">
+    <span nz-icon nzType="plus" style="font-size: 20px;"
+          [style.color]="activeThemeColor.color"
+          nzTheme="outline"></span>
+    <span *ngIf="!isEditMode" class="title" [style.color]="activeThemeColor.color">Добавить шаг</span>
+    <input [ngClass]="{title: true, input: true}" [(ngModel)]="tmpTitle" *ngIf="isEditMode"
+           placeholder="Создать список"
+           (blur)="toggleEditMode()"
+           (keyup.enter)="addStepHandler()"
+           [appAutofocus]="isEditMode"/>
+  </div>
+</div>
+<app-task-step *ngFor="let step of selectedTask.steps" [step]="step" [selectedTask]="selectedTask">
+</app-task-step>
+
+

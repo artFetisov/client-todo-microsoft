@@ -1,0 +1,23 @@
+@import '../../scss/_variables';
+
+.content-box {
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 48px);
+  background-color: $secondary-bg-color;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transition: background-color .3s ease;
+  padding: 24px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #A19F9D;
+    border-radius: 10px;
+  }
+
+}

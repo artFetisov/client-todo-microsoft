@@ -1,0 +1,19 @@
+@import '../../../../core/scss/_variables';
+
+.edit-title-box {
+  padding: 12px 24px;
+  line-height: 20px;
+  width: 100%;
+  cursor: text;
+
+  .title {
+    margin-left: 16px;
+    font-weight: 600;
+  }
+
+  .input {
+    outline: none;
+    border: none;
+  }
+}
+

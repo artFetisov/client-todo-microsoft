@@ -1,0 +1,47 @@
+@import '../../../../../core/scss/_variables';
+
+.add-task-container {
+  width: 100%;
+  background-color: $main-white-color;
+  margin-top: 8px;
+  border-radius: 4px;
+  min-height: 52px;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
+  flex-wrap: wrap;
+  box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+
+
+  .input-wrapper {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: text;
+
+    .input {
+      width: 100%;
+      border: none;
+      outline: none;
+      color: black;
+
+      &::placeholder {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .settings {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 16px;
+
+    .button {
+      margin-left: 10px;
+    }
+  }
+}

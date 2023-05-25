@@ -1,0 +1,60 @@
+<div *ngIf="completedTasks.length > 0 || uncompletedTasks.length > 0 || !!(activeCategory$ | async)">
+  <app-top-toolbar *ngIf="(activeCategory$ | async)?.title"
+                   [selectedCategory]="$any(activeCategory$ | async)"
+                   (changeCategoryTitleEvent)="changeCategoryTitle($event)"
+                   (deleteCategoryEvent)="deleteCategory($event)"
+                   (getTasksByCategoryEvent)="getTasksByCategory($event)"
+                   (filterByEvent)="sortBy($event)"
+                   [isOpenLeftSideBar]="isOpenLeftSideBar"
+                   (setThemeEvent)="setThemeColor($event)"
+                   [activeThemeColor]="$any(activeThemeColor$ | async)"
+  >
+  </app-top-toolbar>
+  <app-add-task [activeThemeColor]="$any(activeThemeColor$ | async)" (addTaskEvent)="addTask($event)"
+                [activeCategory]="$any( activeCategory$ | async)"
+                *ngIf="(activeCategory$ | async)?.title"></app-add-task>
+  <div *ngIf="!(activeCategory$ | async)?.title && !!(categories$ | async)"
+       style="font-size: 20px; font-weight: 600">Все задачи
+  </div>
+  <app-task
+    [activeThemeColor]="$any(activeThemeColor$ | async)"
+    [task]="task"
+    *ngFor="let task of uncompletedTasks"
+    class="task-box"
+    (selectTaskEvent)="selectTask($event)"
+    (changeTaskStatusEvent)="changeTaskStatus($event)"
+    (changeTaskPriorityEvent)="changeTaskPriority($event)"
+  >
+  </app-task>
+
+  <div *ngIf="completedTasks.length > 0">
+    <nz-collapse [nzBordered]="false">
+      <nz-collapse-panel [nzHeader]="collapse.name + '  ' + completedTasks.length"
+                         [nzActive]="collapse.active"
+                         [nzDisabled]="collapse.disabled">
+        <app-task
+          [activeThemeColor]="$any(activeThemeColor$ | async)"
+          [task]="task"
+          *ngFor="let task of completedTasks"
+          class="task-box"
+          (selectTaskEvent)="selectTask($event)"
+          (changeTaskStatusEvent)="changeTaskStatus($event)"
+          (changeTaskPriorityEvent)="changeTaskPriority($event)"
+        ></app-task>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+
+
+</div>
+
+
+<div class="text" *ngIf="(categories$ | async)?.length === 0 || (categories$ | async) === undefined">
+  <div>Привет!</div>
+  <div>Для начала работы создайте свой первый список задач!</div>
+</div>
+
+<div class="text" *ngIf="uncompletedTasks.length === 0 && completedTasks.length === 0 && !(activeCategory$ | async)">
+  Тщательный поиск по вашему
+  запросу не дал никаких результатов
+</div>

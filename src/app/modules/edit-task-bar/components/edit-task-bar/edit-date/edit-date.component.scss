@@ -1,0 +1,25 @@
+@import '../../../../../core/scss/variables';
+
+.edit-date-box {
+  width: 100%;
+  margin-top: 10px;
+  padding: 16px;
+  background-color: $main-white-color;
+  border-radius: 4px 4px 0 0;
+
+  .text {
+    font-size: 12px;
+    font-weight: 600;
+    color: $secondary-color;
+    text-align: center;
+  }
+
+  .box {
+    line-height: 20px;
+    color: $secondary-color;
+
+    .title {
+      margin: 0 16px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import './src/app/core/scss/_variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.ant-collapse-content-box {
+  padding: 0 !important;
+}
+
+.ant-popover-inner-content {
+  padding: 0 !important;
+}
+
+.ant-collapse-header {
+  font-weight: bold;
+}

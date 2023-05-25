@@ -1,0 +1,14 @@
+<div class="step">
+  <label nz-checkbox [nzChecked]="step.completed" (change)="changeStepStatusHandler()"></label>
+  <div class="input-wrapper" (click)="setIsEditMode(true)">
+    <span *ngIf="!isEditMode" [ngClass]="{completed: step.completed}">{{step.title}}</span>
+    <input *ngIf="isEditMode" class="input" type="text" [appAutofocus]="isEditMode"
+           (blur)="changeStepTitleHandler(); $event.stopPropagation()"
+           [(ngModel)]="tmpTitle"
+           (keyup.enter)="changeStepTitleHandler() "/>
+    <span nz-tooltip="delete task" nzTooltipTitle="Удалить шаг">
+       <span nz-icon nzType="close" nzTheme="outline" style="cursor:pointer;"
+             (click)="deleteStepHandler(); $event.stopPropagation()"></span>
+    </span>
+  </div>
+</div>

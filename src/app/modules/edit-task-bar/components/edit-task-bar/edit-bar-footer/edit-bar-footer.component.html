@@ -1,0 +1,15 @@
+<div class="footer-container">
+  <div class="footer">
+  <span nz-tooltip="delete task" nzTooltipTitle="Скрыть подробное представление">
+      <span nz-icon nzType="right-square" nzTheme="outline" (click)="hideEditBarHandler()"
+            style="cursor: pointer;"></span>
+    </span>
+    <div class="date">Создано {{selectedTask.createdAt | taskDate}}</div>
+    <span nz-tooltip="delete task" nzTooltipTitle="Удалить задачу">
+      <span nz-icon nzType="delete" nzTheme="outline" (click)="deleteTaskHandler()" style="cursor: pointer;"></span>
+  </span>
+  </div>
+</div>
+
+
+

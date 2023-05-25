@@ -1,0 +1,43 @@
+<div class="edit-color-category" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+  <span nz-icon nzType="tag" nzTheme="outline" style="font-size: 20px;color: #605e5c"></span>
+  <div class="selected-colors-box">
+    <div *ngFor="let colorCat of selectedTask.colorCategory"
+         class="selected-color"
+         [style.background-color]="colorCat.color"
+
+    >
+        <span class="title"
+              [style.color]="colorCat.border"
+              [style.background-color]="colorCat.color"
+              [appHoverColor]="colorCat.color"
+              [bgColor]="colorCat.border"
+        >{{colorCat.title}}</span>
+      <span class="close" (click)="deleteColorCategoryHandler(colorCat); $event.stopPropagation()"
+            [style.color]="colorCat.border"
+            [style.background-color]="colorCat.color"
+            [appHoverColor]="colorCat.color"
+            [bgColor]="colorCat.border"
+      >
+            <span nz-icon nzType="close" nzTheme="outline"
+                  style="font-size: 10px;"
+            ></span>
+          </span>
+    </div>
+    <span class="text">Выбрать категорию</span>
+  </div>
+</div>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li *ngFor="let colorCat of colorCategories" nz-menu-item (click)="changeColorCategoryHandler(colorCat)">
+      <span class="circle" [style.background-color]="colorCat.color"
+            [style.border-color]="colorCat.border"
+            style="border-width: 1px;"
+      ></span>
+      <span class="color-title">{{colorCat.title}}</span>
+      <span nz-icon nzType="check" nzTheme="outline" *ngIf="checkHaveColor(colorCat)"
+            style="margin-left: auto;font-size: 12px;"></span>
+    </li>
+  </ul>
+</nz-dropdown-menu>
+
+

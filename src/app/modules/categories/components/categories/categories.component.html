@@ -1,0 +1,20 @@
+<div>
+  <div class="edit-title-box" (click)="toggleEditMode()">
+    <span nz-icon nzType="plus" style="font-size: 20px;color: #2564CF"
+          nzTheme="outline"></span>
+    <span *ngIf="!isEditMode" style="color: #2564CF" class="title">Создать список</span>
+    <input [ngClass]="{title: true, input: true}" [(ngModel)]="tmpCatTitle" *ngIf="isEditMode"
+           placeholder="Создать список"
+           (blur)="toggleEditMode()"
+           (keyup.enter)="addCategoryHandler()"
+           [appAutofocus]="isEditMode"
+    />
+  </div>
+  <ul>
+    <app-category *ngFor="let category of categories$ | async" [category]="category"
+                  [countUncompletedTasks]="getUncompletedTasksByCategory(category.id)"
+                  (setActiveCategoryEvent)="setActiveCategory($event)"
+                  (getTasks)="getTasksByCategoryId($event)"
+                  [activeCategory]="$any(activeCategory$ | async)"></app-category>
+  </ul>
+</div>

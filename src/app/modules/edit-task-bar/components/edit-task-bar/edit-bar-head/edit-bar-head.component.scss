@@ -1,0 +1,34 @@
+@import '../../../../../core/scss/variables';
+
+.edit-bar-head {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: $main-white-color;
+  border-radius: 4px 4px 0 0;
+
+  .detail-box {
+    line-height: 20px;
+    width: 100%;
+
+
+    .editable-content {
+      margin: 0 16px;
+      cursor: text;
+      font-size: 16px;
+      font-weight: 600;
+
+      .input {
+        border: none !important;
+        outline: none !important;
+        //font-size: 16px;
+        //font-weight: 600;
+      }
+    }
+  }
+}
+
+.completed {
+  text-decoration: line-through;
+}

@@ -1,0 +1,16 @@
+@import '../../../../../core/scss/variables';
+
+.edit-category {
+  width: 100%;
+  padding: 16px;
+  margin-top: 10px;
+  background-color: $main-white-color;
+  border-radius: 4px 4px 0 0;
+
+  .text {
+    font-size: 12px;
+    font-weight: 600;
+    color: $secondary-color;
+    text-align: center;
+  }
+}

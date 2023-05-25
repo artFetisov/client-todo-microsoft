@@ -1,0 +1,17 @@
+<div nz-row class="header">
+  <nz-input-group [nzSuffix]="inputClearTpl" [nzPrefix]="searchIcon">
+    <input #searchInput type="text" nz-input [(ngModel)]="tmpTitle" placeholder="Поиск"/>
+  </nz-input-group>
+  <ng-template #searchIcon><span nz-icon nzType="search"></span></ng-template>
+  <ng-template #inputClearTpl>
+      <span
+        nz-icon
+        class="ant-input-clear-icon"
+        nzTheme="fill"
+        nzType="close-circle"
+        *ngIf="tmpTitle"
+        (click)="tmpTitle = ''"
+      ></span>
+  </ng-template>
+</div>
+

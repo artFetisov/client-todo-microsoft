@@ -1,0 +1,13 @@
+<div class="edit-date-box" (click)="toggleEditMode()">
+  <div *ngIf="selectedTask.completionDate" class="text">Изменить дату выполнения</div>
+  <div>
+    <nz-date-picker class="date-picker" [ngModel]="selectedTask.completionDate"
+                    (ngModelChange)="changeTaskDateHandler($event)"
+                    [nzPlaceHolder]="'Добавить дату выполнения'"
+                    style="width: 100%"
+    ></nz-date-picker>
+  </div>
+</div>
+
+
+

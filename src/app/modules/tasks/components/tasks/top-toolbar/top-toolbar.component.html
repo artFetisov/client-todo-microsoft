@@ -1,0 +1,111 @@
+<div class="tasks-bar-top" [style.color]="activeThemeColor.color">
+  <div class="tasks-bar-headline">
+    <span *ngIf="!isOpenLeftSideBar"
+          (click)="toggleShowLeftSideBar()"
+          style="font-size: 16px;cursor: pointer" nz-icon nzType="menu"
+          nzTheme="outline"></span>
+    <div class="title-box" *ngIf="!isEditMode" (click)="toggleEditMode()">
+      <span *ngIf="isOpenLeftSideBar" nz-icon nzType="unordered-list" nzTheme="outline"
+            style="font-size: 24px;margin-right: 8px;"></span>
+      <span class="title">{{selectedCategory?.title}}</span>
+    </div>
+    <div [ngClass]="{'title-box': true}" *ngIf="isEditMode">
+      <div class="border">
+        <input class="input" type="text" [(ngModel)]="tmpTitle" (blur)="changeCategoryTitleHandler()"
+               [appAutofocus]="isEditMode"
+               (keyup.enter)="changeCategoryTitleHandler()"/>
+      </div>
+    </div>
+
+    <span nz-tooltip="Параметры списка" nzTooltipTitle='Меню "Параметры списка"'>
+      <span class="icon" nz-icon
+            nzType="ellipsis" nzTheme="outline"
+            style="font-size: 24px;" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+    </span>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li class="params-title">Параметры списка</li>
+        <li nz-menu-divider></li>
+        <li class="param-item" nz-menu-item (click)="toggleEditMode()">
+        <span nz-icon nzType="edit" nzTheme="outline"
+              style="margin-right: 10px;font-size: 16px;"></span>
+        <span>Переименовать список</span>
+        </li>
+        <li nzTitle=" Изменить тему" nz-submenu>
+           <ul>
+             <li class="param-item" nz-menu-item class="theme-circle-wrapper">
+                <span *ngFor="let theme of allThemeColors" class="theme-circle"
+                      [style.background-color]="theme.color"
+                      (click)="setActiveThemeHandler(theme)">
+                  <span *ngIf="activeThemeColor.id === theme.id" nz-icon nzType="check" nzTheme="outline"></span>
+                </span>
+             </li>
+           </ul>
+        </li>
+        <li nz-menu-divider></li>
+        <li class="param-item delete" nz-menu-item (click)="deleteCategoryHandler()">
+        <span nz-icon nzType="delete" nzTheme="outline"
+              style="margin-right: 10px;font-size: 16px;color: #A80000;"></span>
+        <span style="color: #A80000;">Удалить список</span>
+      </li>
+      </ul>
+    </nz-dropdown-menu>
+       </span>
+
+  </div>
+
+  <span nz-tooltip="Параметры списка" nzTooltipTitle='Сортировка'>
+
+  <div class="tasks-bar-right">
+    <span nz-dropdown nzTrigger="click"
+          [nzDropdownMenu]="sort">
+      <span nz-icon nzType="arrow-up" style="font-size: 16px" nzTheme="outline"></span>
+      <span nz-icon nzType="arrow-down" style="font-size: 16px" nzTheme="outline"></span>
+      <span class="title">Сортировка</span>
+    </span>
+
+    <nz-dropdown-menu #sort="nzDropdownMenu">
+      <ul nz-menu>
+         <li class="params-title">Порядок сортировки</li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item class="param-item"
+            (click)="sortByParamsHandler({property: 'priority', direction: 'ASC'}); setCurrentSort('важности')">
+          <span nz-icon nzType="star" nzTheme="outline" style="font-size: 18px;margin-right: 10px;"></span>
+          <span>Выжность</span>
+        </li>
+        <li nz-menu-item class="param-item"
+            (click)="sortByParamsHandler({property: 'completionDate', direction: 'ASC'}); setCurrentSort('дате выполнения')">
+          <span nz-icon nzType="calendar" nzTheme="outline" style="font-size: 18px;margin-right: 10px;"></span>
+        <span>Дата выполнения</span>
+        </li>
+        <li nz-menu-item class="param-item"
+            (click)="sortByParamsHandler({property: 'title', direction: 'ASC'}); setCurrentSort('алфавиту')">
+       <span nz-icon nzType="highlight" nzTheme="outline" style="font-size: 18px;margin-right: 10px;"></span>
+        <span>По алфавиту</span>
+      </li>
+      <li class="param-item"
+          (click)="sortByParamsHandler({property: 'createdAt', direction: 'ASC'}); setCurrentSort('дате создания')"
+          nz-menu-item>
+      <span nz-icon nzType="diff" nzTheme="outline" style="font-size: 18px;margin-right: 10px;"></span>
+        <span>По дате создания</span>
+      </li>
+      </ul>
+
+    </nz-dropdown-menu>
+  </div>
+  </span>
+</div>
+
+<div *ngIf="currentSortFilter" class="sort-title-wrapper">
+  <span nz-tooltip="Параметры списка" nzTooltipTitle='Обратный порядок сортировки' style="cursor: pointer">
+  <span style="font-size: 12px;color: rgba(0, 0, 0, 0.5);margin-right: 6px;" nz-icon
+        (click)="changeSortDirectionHandler()"
+        [nzType]="currentSortDirection === 'ASC' ? 'down' : 'up'"
+        nzTheme="outline"></span>
+  </span>
+  <span class="title">Сортировка по {{currentSortFilter}}</span>
+  <span nz-tooltip="Параметры списка" nzTooltipTitle='Удалить параметр порядка сортировки' style="cursor: pointer">
+  <span style="font-size: 12px;color: rgba(0, 0, 0, 0.5);" nz-icon nzType="close" nzTheme="outline"
+        (click)="clearSortParamsHandler()"></span>
+  </span>
+</div>

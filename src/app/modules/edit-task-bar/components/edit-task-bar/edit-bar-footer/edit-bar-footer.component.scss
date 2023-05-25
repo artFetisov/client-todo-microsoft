@@ -1,0 +1,39 @@
+@import '../../../../../core/scss/_variables';
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+
+  .footer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 20px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 0.5px;
+      width: 100%;
+      background-color: #e1dfdd;
+    }
+
+
+    .date {
+      font-size: 12px;
+      font-weight: 600;
+      color: $secondary-color
+    }
+  }
+}
+
+
+

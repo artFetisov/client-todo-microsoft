@@ -1,0 +1,12 @@
+<div class="edit-category">
+  <div class="text">Изменить список</div>
+  <nz-select [(ngModel)]="activeCategory"
+             style="width: 100%;"
+             nzPlaceHolder="Изменить категорию"
+             (ngModelChange)="changeTaskCategoryHandler($event)">
+    <nz-option
+      *ngFor="let category of categories"
+      [nzValue]="category"
+      [nzLabel]="category.title"></nz-option>
+  </nz-select>
+</div>
