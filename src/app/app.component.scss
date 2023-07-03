@@ -1,22 +1,3 @@
-.app {
-  display: flex;
-  position: relative;
-  width: 100%;
-  max-height: calc(100vh - 48px);
 
-  .sidebar {
-    flex-grow: 0;
-  }
-
-  .content {
-    flex-grow: 20;
-    flex-shrink: 2;
-    flex-basis: calc(100vw - 650px);
-  }
-
-  .edit-task-bar {
-    flex-grow: 0;
-  }
-}
 
 

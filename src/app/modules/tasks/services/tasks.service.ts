@@ -10,7 +10,7 @@ import {
   UpdateStepData,
   UpdateTaskData,
 } from '../../../shared/data/model/task';
-import {BehaviorSubject, map, pipe} from 'rxjs';
+import {BehaviorSubject, map} from 'rxjs';
 import {
   LocalStorageService,
   ColorCategories,
@@ -481,7 +481,6 @@ export class TasksService {
 
 
   sortTasks(params: SortParams, categoryId: number) {
-    debugger
     this.httpService
       .get<DomainTaskWithAllFields[]>(
         `${this.baseUrl}tasks/sort/${categoryId}?property=${params.property}&direction=${params.direction}`
