@@ -54,9 +54,9 @@ export class CategoriesService {
   }
 
   deleteCategory(catId: number) {
-    debugger
     this.httpService.delete(`${this.baseUrl}categories/${catId}`).subscribe(res => {
       this.categories$.next(this.categories$.getValue().filter(cat => cat.id !== catId))
+      this.activeCategory$.next(this.categories$.getValue()[0])
     })
   }
 }

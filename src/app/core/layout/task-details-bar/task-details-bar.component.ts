@@ -21,6 +21,6 @@ export class TaskDetailsBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription && this.subscription.unsubscribe()
   }
 }

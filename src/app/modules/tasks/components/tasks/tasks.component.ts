@@ -70,8 +70,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.subscription2.unsubscribe()
+    this.subscription && this.subscription.unsubscribe();
+    this.subscription2 && this.subscription2.unsubscribe()
   }
 
   addTask(data: { title: string, categoryId: number }) {

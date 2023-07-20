@@ -20,7 +20,6 @@ export class AddTaskComponent {
   }
 
   addTaskHandler() {
-    debugger
     if (this.tmpTitle.trim().length > 0) {
       this.addTaskEvent.emit({title: this.tmpTitle, categoryId: this.activeCategory.id})
       this.tmpTitle = ''

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TasksService} from '../../../tasks/services/tasks.service';
-import {map, Observable, onErrorResumeNextWith, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {
   ColorCategory,
   Task,
@@ -46,7 +46,7 @@ export class EditTaskBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription && this.subscription.unsubscribe();
   }
 
   changeTask(data: UpdateTaskData) {

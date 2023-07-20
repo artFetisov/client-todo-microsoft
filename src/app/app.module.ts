@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {NZ_I18N} from 'ng-zorro-antd/i18n';
 import {en_US} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CategoriesModule} from "./modules/categories/categories.module";
@@ -17,6 +17,10 @@ import localeRu from '@angular/common/locales/ru';
 import {LoginComponent} from './components/login/login/login.component';
 import {MainComponent} from './components/main/main/main.component';
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
+import {WelcomeComponent} from './components/welcome/welcome/welcome.component';
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {RegistrationComponent} from './components/registration/registration.component';
 
 registerLocaleData(localeRu);
 
@@ -24,9 +28,12 @@ registerLocaleData(localeRu);
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    WelcomeComponent,
+    RegistrationComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -35,7 +42,9 @@ registerLocaleData(localeRu);
     CategoriesModule,
     CoreModule,
     NzLayoutModule,
-    NzGridModule
+    NzGridModule,
+    NzButtonModule,
+    NzInputModule
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},

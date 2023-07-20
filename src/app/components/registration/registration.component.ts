@@ -1,20 +1,20 @@
 import {Component} from '@angular/core';
-import {AuthService} from "../../../shared/services/auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from "../../shared/services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.scss']
 })
-export class LoginComponent {
+export class RegistrationComponent {
   currentInputFieldName: 'email' | 'password' = 'email'
 
   constructor(private readonly authService: AuthService, private router: Router) {
   }
 
-  loginForm = new FormGroup({
+  registrationForm = new FormGroup({
     email: new FormControl('', [
       Validators.email,
       Validators.required
@@ -27,25 +27,25 @@ export class LoginComponent {
   })
 
   get email() {
-    return this.loginForm.get('email')
+    return this.registrationForm.get('email')
   }
 
   get password() {
-    return this.loginForm.get('password')
-  }
-
-  redirect() {
-    this.router.navigate(['/todo'])
+    return this.registrationForm.get('password')
   }
 
   setCurrentInputFieldName(name: 'email' | 'password') {
     this.currentInputFieldName = name
   }
 
-  handleLogin() {
-    this.authService.login({
-      email: this.loginForm.value.email as string,
-      password: this.loginForm.value.password as string
+  redirect() {
+    this.router.navigate(['/todo'])
+  }
+
+  async handleRegistration() {
+    this.authService.registration({
+      email: this.registrationForm.value.email as string,
+      password: this.registrationForm.value.password as string
     }).then(() => this.redirect())
   }
 }

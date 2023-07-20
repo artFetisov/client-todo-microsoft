@@ -33,16 +33,14 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activeCategory$ = this.categoriesService.activeCategory$;
     this.categories$ = this.categoriesService.categories$
-    // this.getCategories()
 
     this.subscription = this.tasksService.tasks$.subscribe(tasks => {
       this.allTasks = tasks
     })
   }
 
-
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription && this.subscription.unsubscribe();
   }
 
   getUncompletedTasksByCategory(catId: number): number {

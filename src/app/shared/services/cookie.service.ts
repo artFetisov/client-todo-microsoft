@@ -16,8 +16,8 @@ export class CookieService {
   }
 
   saveTokenStorage = (data: ITokens) => {
-    Cookies.set('accessToken', data.accessToken)
-    Cookies.set('refreshToken', data.refreshToken)
+    Cookies.set(Tokens.ACCESS_TOKEN, data.accessToken)
+    Cookies.set(Tokens.REFRESH_TOKEN, data.refreshToken)
   }
 
   removeTokenStorage = () => {

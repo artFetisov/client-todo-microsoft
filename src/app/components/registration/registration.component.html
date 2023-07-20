@@ -1,7 +1,7 @@
-<div class="login">
-  <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="login-form">
+<div class="registration">
+  <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="handleRegistration()">
     <div *ngIf="currentInputFieldName === 'email'">
-      <div class="title">Войти</div>
+      <div class="title">Зарегистрироваться</div>
       <input nz-input placeholder="Электронная почта" formControlName="email"/>
       <div *ngIf="email?.invalid && email?.touched" class="error">
         <div *ngIf="email?.errors">
@@ -11,13 +11,15 @@
           Некорректный email
         </div>
       </div>
-      <div class="go-to-reg">
-        <span>Нет учетной записи?</span>
-        <a class="link" routerLink="/registration" routerLinkActive="active">Создайте ее!</a>
+      <div class="go-to-login">
+        <span>Уже есть учетная запись?</span>
+        <a class="link" routerLink="/login" routerLinkActive="active">Войти в нее!</a>
       </div>
       <div class="buttons">
-        <button [disabled]="email?.invalid" class="btn-to-next" nz-button nzType="primary"
-                (click)="setCurrentInputFieldName('password')">Далее
+        <button class="btn-to-next"
+                [disabled]="email?.invalid" nz-button nzType="primary"
+                (click)="setCurrentInputFieldName('password')">
+          Далее
         </button>
       </div>
     </div>
@@ -35,16 +37,21 @@
           Максимальная длина пароля 16 символов
         </div>
       </div>
-      <div class="go-to-reg">
-        <span>Нет учетной записи?</span>
-        <a class="link" routerLink="/registration" routerLinkActive="active">Создайте ее!</a>
+      <div class="go-to-login">
+        <span>Уже есть учетная запись?</span>
+        <a class="link" routerLink="/login" routerLinkActive="active">Войти в нее!</a>
       </div>
       <div class="buttons">
-        <button nz-button (click)="setCurrentInputFieldName('email')">Назад
+        <button nz-button class="btn-to-back" (click)="setCurrentInputFieldName('email')">Назад
         </button>
-        <button class="btn-to-next" nz-button nzType="primary">Войти
+        <button
+          [disabled]="password?.invalid && !!password?.errors"
+          nz-button
+          nzType="primary">
+          Зарегистрироваться
         </button>
       </div>
     </div>
   </form>
 </div>
+

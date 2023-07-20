@@ -4,12 +4,17 @@ import {CookieService, Tokens} from "../services/cookie.service";
 import Cookies from "js-cookie";
 import {Injectable} from "@angular/core";
 import {AuthService} from "../services/auth.service";
+import {UserService} from "../services/user.service";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private readonly cookieService: CookieService, private readonly authService: AuthService) {
+  constructor(
+    private readonly cookieService: CookieService,
+    private readonly authService: AuthService,
+    private readonly userService: UserService
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -43,6 +48,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.authService.refreshToken().pipe(
       switchMap(data => {
         this.cookieService.saveTokenStorage(data.tokens)
+        this.userService.setUserData(data.user)
         return next.handle(this.addTokenHeader(req, data.tokens.accessToken));
       }),
       catchError((err) => {

@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription && this.subscription.unsubscribe()
   }
 
   toggleShowLeftSideBarHandler() {
