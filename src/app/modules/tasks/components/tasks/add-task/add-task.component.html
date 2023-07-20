@@ -10,9 +10,6 @@
     />
   </div>
   <div class="settings">
-    <span nz-tooltip nzTooltipTitle="Добавить дату выполнения">
-      <span nz-icon nzType="calendar" nzTheme="outline" style="font-size: 18px;color: #797775"></span>
-    </span>
     <button [disabled]="!tmpTitle?.trim()" class="button" nz-button nzType="primary"
             (click)="addTaskHandler(); $event.stopPropagation()">
       Добавить

@@ -15,7 +15,7 @@ export class AddTaskComponent {
   @Output() addTaskEvent = new EventEmitter<{ title: string, categoryId: number }>()
 
   toggleEditMode() {
-    this.tmpTitle = ''
+    // this.tmpTitle = ''
     this.isEditMode = !this.isEditMode
   }
 
