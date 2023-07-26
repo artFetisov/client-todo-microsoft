@@ -7,7 +7,7 @@
     <div class="title-box" *ngIf="!isEditMode" (click)="toggleEditMode()">
       <span *ngIf="isOpenLeftSideBar" nz-icon nzType="unordered-list" nzTheme="outline"
             style="font-size: 24px;margin-right: 8px;"></span>
-      <span class="title">{{selectedCategory?.title}}</span>
+      <span class="title">{{selectedCategory.title}}</span>
     </div>
     <div [ngClass]="{'title-box': true}" *ngIf="isEditMode">
       <div class="border">

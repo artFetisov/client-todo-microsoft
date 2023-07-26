@@ -10,11 +10,11 @@ import {Observable} from "rxjs";
 export class AppComponent implements OnInit {
   isLoading$!: Observable<boolean>
 
-  constructor(private readonly authService: AuthService) {
+  constructor(readonly authService: AuthService) {
   }
 
   ngOnInit() {
-    this.isLoading$ = this.authService.isLoading
+    this.isLoading$ = this.authService.isLoading$
     this.authService.authMe()
   }
 }

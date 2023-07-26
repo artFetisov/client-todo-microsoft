@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../../shared/services/auth.service";
-import {Router} from "@angular/router";
+import {Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent {
   currentInputFieldName: 'email' | 'password' = 'email'
 
-  constructor(private readonly authService: AuthService, private router: Router) {
+  constructor(private readonly authService: AuthService, private router: Router, private userService: UserService) {
   }
 
   loginForm = new FormGroup({
@@ -35,7 +36,9 @@ export class LoginComponent {
   }
 
   redirect() {
-    this.router.navigate(['/todo'])
+    const params: Params = this.userService.user ? {isLoggedIn: true} : {}
+
+    this.router.navigate(['/todo'], {queryParams: params})
   }
 
   setCurrentInputFieldName(name: 'email' | 'password') {

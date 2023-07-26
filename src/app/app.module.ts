@@ -21,6 +21,7 @@ import {WelcomeComponent} from './components/welcome/welcome/welcome.component';
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {RegistrationComponent} from './components/registration/registration.component';
+import {NzSpinModule} from "ng-zorro-antd/spin";
 
 registerLocaleData(localeRu);
 
@@ -44,7 +45,8 @@ registerLocaleData(localeRu);
     NzLayoutModule,
     NzGridModule,
     NzButtonModule,
-    NzInputModule
+    NzInputModule,
+    NzSpinModule
   ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},

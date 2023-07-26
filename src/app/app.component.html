@@ -1,6 +1,11 @@
-<div>
-  <div *ngIf="isLoading$ | async">...Загрузка</div>
-  <div *ngIf="!(isLoading$ | async)">
-    <router-outlet></router-outlet>
+<ng-container *ngIf="(isLoading$ | async); else content">
+  <div class="loader-box">
+    <nz-spin nzSimple nzSize='large'></nz-spin>
   </div>
-</div>
+</ng-container>
+
+<ng-template #content>
+  <router-outlet></router-outlet>
+</ng-template>
+
+

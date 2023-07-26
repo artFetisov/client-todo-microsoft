@@ -4,7 +4,7 @@ import {environment} from "../../../environments/environment";
 import {IAuthRequest, IAuthResponse} from "../data/model/auth";
 import Cookies from "js-cookie";
 import {CookieService, Tokens} from "./cookie.service";
-import {BehaviorSubject, catchError, throwError} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {UserService} from "./user.service";
 import {CategoriesService} from "../../modules/categories/services/categories.service";
 
@@ -12,7 +12,8 @@ import {CategoriesService} from "../../modules/categories/services/categories.se
   providedIn: 'root'
 })
 export class AuthService {
-  isLoading = new BehaviorSubject<boolean>(false)
+  isLoading$ = new BehaviorSubject<boolean>(false)
+  isLoggedIn = false
 
   constructor(
     private readonly httpService: HttpClient,
@@ -22,7 +23,7 @@ export class AuthService {
   ) {
   }
 
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.baseUrl
   isAuth = false
 
 
@@ -31,19 +32,38 @@ export class AuthService {
     return this.httpService.post<IAuthResponse>(`${this.baseUrl}auth/refresh`, {refreshToken})
   }
 
-  authMe() {
-    this.isLoading.next(true)
-    this.httpService.get<IAuthResponse>(`${this.baseUrl}auth/me`).pipe(catchError((error) => {
-      this.isLoading.next(false)
-      return throwError(error)
-    }))
-      .subscribe((response) => {
+  // authMeRx() {
+  //   this.isLoading.next(true)
+  //   this.httpService.get<IAuthResponse>(`${this.baseUrl}auth/me`).pipe(catchError((error) => {
+  //     this.isLoading.next(false)
+  //     return throwError(error)
+  //   }))
+  //     .subscribe((response) => {
+  //       this.cookieService.saveTokenStorage(response.tokens)
+  //       this.userService.setUserData(response.user)
+  //       this.categoryService.getCategories()
+  //       this.isLoading.next(false)
+  //       this.isAuth = true
+  //     })
+  // }
+
+  async authMe() {
+    this.isLoading$.next(true)
+
+    try {
+      const response = await this.httpService.get<IAuthResponse>(`${this.baseUrl}auth/me`).toPromise()
+
+      if (response?.tokens && response.user) {
+        this.isLoggedIn = true
         this.cookieService.saveTokenStorage(response.tokens)
         this.userService.setUserData(response.user)
-        this.isLoading.next(false)
-        this.categoryService.getCategories()
-        this.isAuth = true
-      })
+        await this.categoryService.getCategories()
+      }
+    } catch (error) {
+    } finally {
+      this.isLoading$.next(false)
+      this.isAuth = true
+    }
   }
 
   async registration(data: IAuthRequest) {
@@ -79,5 +99,6 @@ export class AuthService {
   }
 
   logout() {
+    this.isLoggedIn = false
   }
 }

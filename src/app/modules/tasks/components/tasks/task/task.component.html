@@ -5,7 +5,7 @@
     <div class="title" [ngClass]="{completed: taskItem.completed}">{{taskItem.title}}</div>
     <div class="task-info-box-data">
 
-      <span class="cat">{{taskItem.category?.title}}</span>
+      <span class="cat">{{taskItem.category.title}}</span>
 
       <span class="point" *ngIf="taskItem.steps.length > 0"></span>
       <span class="task-date" *ngIf="taskItem.steps.length > 0">

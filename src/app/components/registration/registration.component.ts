@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Params, Router} from "@angular/router";
+import {UserService} from "../../shared/services/user.service";
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class RegistrationComponent {
   currentInputFieldName: 'email' | 'password' = 'email'
 
-  constructor(private readonly authService: AuthService, private router: Router) {
+  constructor(private readonly authService: AuthService, private router: Router, private userService: UserService) {
   }
 
   registrationForm = new FormGroup({
@@ -39,7 +40,9 @@ export class RegistrationComponent {
   }
 
   redirect() {
-    this.router.navigate(['/todo'])
+    const params: Params = this.userService.user ? {isLoggedIn: true} : {}
+
+    this.router.navigate(['/todo'], {queryParams: params})
   }
 
   async handleRegistration() {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, map} from 'rxjs';
+import {BehaviorSubject, map, ObservableInput} from 'rxjs';
 import {Category} from '../../../shared/data/model/category';
 import {environment} from 'src/environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -22,8 +22,8 @@ export class CategoriesService {
     this.httpService
       .get<Category[]>(`${this.baseUrl}categories`)
       .subscribe((res) => {
-        this.categories$.next(res)
         this.setActiveCategory(res[0])
+        return this.categories$.next(res)
       });
   }
 

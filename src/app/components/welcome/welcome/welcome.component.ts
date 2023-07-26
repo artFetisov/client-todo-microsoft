@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
+import {Params, Router} from "@angular/router";
 import {UserService} from "../../../shared/services/user.service";
 
 @Component({
@@ -15,6 +15,10 @@ export class WelcomeComponent {
   }
 
   goToNextPage() {
-    this.router.navigate([this.userService.user ? '/todo' : '/login'])
+    const params: Params = this.userService.user ? {isLoggedIn: true} : {}
+
+    this.router.navigate([this.userService.user ? 'todo' : 'login'],
+      {queryParams: params}
+    )
   }
 }

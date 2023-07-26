@@ -1,7 +1,7 @@
 <li
   class="category-box"
-  [ngClass]="{active: category?.id === activeCategory?.id,
-        hovered: (category?.id === hoveredCategory?.id && hoveredCategory?.id !== activeCategory.id)}"
+  [ngClass]="{active: category.id === activeCategory.id,
+        hovered: (category.id === hoveredCategory?.id && hoveredCategory?.id !== activeCategory.id)}"
   (mouseenter)="hoverEnterCategoryHandler(category)"
   (mouseleave)="hoverLeaveCategoryHandler()"
   (click)="setActiveCategoryHandler(category)">
