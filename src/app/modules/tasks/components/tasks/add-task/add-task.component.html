@@ -10,7 +10,7 @@
     />
   </div>
   <div class="settings">
-    <button [disabled]="!tmpTitle.trim()" class="button" nz-button nzType="primary"
+    <button [disabled]="!tmpTitle?.trim()" class="button" nz-button nzType="primary"
             (click)="addTaskHandler(); $event.stopPropagation()">
       Добавить
     </button>
