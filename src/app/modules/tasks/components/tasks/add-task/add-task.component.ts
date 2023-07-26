@@ -7,7 +7,7 @@ import {Category, ThemeColor} from "../../../../../shared/data/model/category";
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent {
-  tmpTitle!: string
+  tmpTitle: string = ''
   isEditMode = true
 
   @Input() activeThemeColor!: ThemeColor
