@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = this.addCorsHeader(req)
+    req = this.addCorsHeaders(req)
     const accessToken = Cookies.get(Tokens.ACCESS_TOKEN)
     if (!!accessToken) {
       req = this.addTokenHeader(req, accessToken);
@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }))
   }
 
-  private addCorsHeader(request: HttpRequest<any>,) {
+  private addCorsHeaders(request: HttpRequest<any>,) {
     return request.clone({
       setHeaders: {
         'Access-Control-Allow-Origin': '*',
