@@ -42,7 +42,14 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addCorsHeader(request: HttpRequest<any>,) {
-    return request.clone({headers: request.headers.set('Access-Control-Allow-Origin', '*')});
+    return request.clone({
+      setHeaders: {
+        'Access-Control-Allow-Origin': '*',
+        "Access-Control-Allow-Credentials": "true",
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD",
+      }
+    })
   }
 
   private addTokenHeader(request: HttpRequest<any>, accessToken: string) {
