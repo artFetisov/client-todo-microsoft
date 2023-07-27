@@ -19,10 +19,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = this.addCorsHeaders(req)
-    // const accessToken = Cookies.get(Tokens.ACCESS_TOKEN)
-    // if (!!accessToken) {
-    //   req = this.addTokenHeader(req, accessToken);
-    // }
+    const accessToken = Cookies.get(Tokens.ACCESS_TOKEN)
+    if (!!accessToken) {
+      req = this.addTokenHeader(req, accessToken);
+    }
 
     return next.handle(req).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && error.status === 401 && !error.url?.includes('refresh')) {
