@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // req = this.addCorsHeader(req)
+    req = this.addCorsHeader(req)
     const accessToken = Cookies.get(Tokens.ACCESS_TOKEN)
     if (!!accessToken) {
       req = this.addTokenHeader(req, accessToken);
