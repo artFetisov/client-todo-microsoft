@@ -1,57 +1,76 @@
 <div class="registration">
-  <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="handleRegistration()">
+  <form
+    class="registration-form"
+    [formGroup]="registrationForm"
+    (ngSubmit)="handleRegistration()"
+  >
     <div *ngIf="currentInputFieldName === 'email'">
       <div class="title">Зарегистрироваться</div>
-      <input nz-input placeholder="Электронная почта" formControlName="email"/>
+      <input nz-input placeholder="Электронная почта" formControlName="email" />
       <div *ngIf="email?.invalid && email?.touched" class="error">
-        <div *ngIf="email?.errors">
-          Введите email
-        </div>
-        <div *ngIf="email?.errors">
-          Некорректный email
-        </div>
+        <div *ngIf="email?.errors">Введите email</div>
+        <div *ngIf="email?.errors">Некорректный email</div>
       </div>
       <div class="go-to-login">
         <span>Уже есть учетная запись?</span>
-        <a class="link" routerLink="/login" routerLinkActive="active">Войти в нее!</a>
+        <a class="link" routerLink="/login" routerLinkActive="active"
+          >Войти в нее!</a
+        >
       </div>
       <div class="buttons">
-        <button class="btn-to-next"
-                [disabled]="email?.invalid" nz-button nzType="primary"
-                (click)="setCurrentInputFieldName('password')">
+        <button
+          class="btn-to-next"
+          [disabled]="email?.invalid"
+          nz-button
+          nzType="primary"
+          (click)="setCurrentInputFieldName('password')"
+        >
           Далее
         </button>
       </div>
     </div>
     <div *ngIf="currentInputFieldName === 'password'">
       <div class="title">Введите пароль</div>
-      <input type="password" nz-input formControlName="password"/>
+      <input type="password" nz-input formControlName="password" />
       <div *ngIf="password?.invalid && password?.touched" class="error">
-        <div *ngIf="password?.errors">
-          Введите пароль
-        </div>
-        <div *ngIf="password?.errors">
-          Минимальная длина пароля 6 символов
-        </div>
+        <div *ngIf="password?.errors">Введите пароль</div>
+        <div *ngIf="password?.errors">Минимальная длина пароля 6 символов</div>
         <div *ngIf="password?.errors">
           Максимальная длина пароля 16 символов
         </div>
       </div>
       <div class="go-to-login">
         <span>Уже есть учетная запись?</span>
-        <a class="link" routerLink="/login" routerLinkActive="active">Войти в нее!</a>
+        <a class="link" routerLink="/login" routerLinkActive="active"
+          >Войти в нее!</a
+        >
       </div>
       <div class="buttons">
-        <button nz-button class="btn-to-back" (click)="setCurrentInputFieldName('email')">Назад
+        <button
+          nz-button
+          class="btn-to-back"
+          (click)="setCurrentInputFieldName('email')"
+        >
+          Назад
         </button>
         <button
           [disabled]="password?.invalid && !!password?.errors"
           nz-button
-          nzType="primary">
+          nzType="primary"
+        >
           Зарегистрироваться
         </button>
       </div>
     </div>
   </form>
+  <div *ngIf="users$ | async" class="users">
+    <div
+      *ngFor="let user of users$ | async"
+      class="user"
+      (click)="handleAuth(user)"
+    >
+      <span>Войти как </span>
+      <span>{{ user.user.email }}</span>
+    </div>
+  </div>
 </div>
-

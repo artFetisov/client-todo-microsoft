@@ -4,7 +4,6 @@ import {Tasks} from '../../../../shared/data/model/task';
 import {CategoriesService} from '../../services/categories.service';
 import {TasksService} from '../../../tasks/services/tasks.service';
 import {Observable, Subscription} from 'rxjs';
-import {LocalStorageService} from '../../../../shared/services/local-storage.service';
 import {HtmlTemplateService} from '../../../../shared/services/html-template.service';
 
 @Component({
@@ -25,7 +24,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   constructor(
     private categoriesService: CategoriesService,
     private tasksService: TasksService,
-    private localStorageService: LocalStorageService,
     private templateService: HtmlTemplateService
   ) {
   }

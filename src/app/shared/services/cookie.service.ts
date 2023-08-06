@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import Cookies from 'js-cookie';
 import {ITokens} from "../data/model/token";
+import {LocalStorageService} from "./local-storage.service";
 
 export enum Tokens {
   ACCESS_TOKEN = 'access-token',
-  REFRESH_TOKEN = 'refresh-token'
+  REFRESH_TOKEN = 'refresh-token',
+  AVAILABLE_ACCOUNTS = 'available-accounts'
 }
+
 
 @Injectable({
   providedIn: 'root'

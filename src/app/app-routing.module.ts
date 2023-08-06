@@ -9,9 +9,12 @@ import {logoutGuard} from "./shared/guards/logout.guard";
 
 const routes: Routes = [
     {path: '', component: WelcomeComponent, title: 'Добро пожаловать'},
-    {path: 'todo', component: MainComponent, title: 'Todo', canActivate: [loginGuard]},
-    {path: 'login', component: LoginComponent, title: 'Войдите', canActivate: [logoutGuard]},
-    {path: 'registration', component: RegistrationComponent, title: 'Зарегистрируйтесь', canActivate: [logoutGuard]},
+    // {path: 'todo', component: MainComponent, title: 'Todo', canActivate: [loginGuard]},
+    // {path: 'login', component: LoginComponent, title: 'Войдите', canActivate: [logoutGuard]},
+    // {path: 'registration', component: RegistrationComponent, title: 'Зарегистрируйтесь', canActivate: [logoutGuard]},
+    {path: 'todo', component: MainComponent, title: 'Todo'},
+    {path: 'login', component: LoginComponent, title: 'Войдите'},
+    {path: 'registration', component: RegistrationComponent, title: 'Зарегистрируйтесь'},
     {path: '**', redirectTo: ''}
   ]
 ;

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
-import {Params, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {UserService} from "../../../shared/services/user.service";
+import {Observable} from "rxjs";
+import {IUser} from "../../../shared/data/model/user";
 
 @Component({
   selector: 'app-welcome',
@@ -8,17 +10,16 @@ import {UserService} from "../../../shared/services/user.service";
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent {
+  user$!: Observable<IUser | null>
+
   constructor(
     private router: Router,
     private readonly userService: UserService
   ) {
+    this.user$ = this.userService.currentUser$
   }
 
   goToNextPage() {
-    const params: Params = this.userService.user ? {isLoggedIn: true} : {}
-
-    this.router.navigate([this.userService.user ? 'todo' : 'login'],
-      {queryParams: params}
-    )
+    this.router.navigate(['login'])
   }
 }

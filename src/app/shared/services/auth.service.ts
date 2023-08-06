@@ -1,35 +1,38 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {IAuthRequest, IAuthResponse} from "../data/model/auth";
-import Cookies from "js-cookie";
-import {CookieService, Tokens} from "./cookie.service";
-import {BehaviorSubject} from "rxjs";
-import {UserService} from "./user.service";
-import {CategoriesService} from "../../modules/categories/services/categories.service";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { IAuthRequest, IAuthResponse } from '../data/model/auth';
+import Cookies from 'js-cookie';
+import { CookieService, Tokens } from './cookie.service';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from './user.service';
+import { CategoriesService } from '../../modules/categories/services/categories.service';
+import { ITokens } from '../data/model/token';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  isLoading$ = new BehaviorSubject<boolean>(false)
-  isLoggedIn = false
+  isLoading$ = new BehaviorSubject<boolean>(false);
+  isLoggedIn = false;
 
   constructor(
     private readonly httpService: HttpClient,
     private readonly cookieService: CookieService,
     private readonly userService: UserService,
-    private readonly categoryService: CategoriesService
-  ) {
-  }
+    private readonly categoryService: CategoriesService,
+    private readonly localStorageService: LocalStorageService
+  ) {}
 
-  baseUrl = environment.baseUrl
-  isAuth = false
-
+  baseUrl = environment.baseUrl;
+  isAuth = false;
 
   refreshToken() {
-    const refreshToken = Cookies.get(Tokens.REFRESH_TOKEN)
-    return this.httpService.post<IAuthResponse>(`${this.baseUrl}auth/refresh`, {refreshToken})
+    const refreshToken = Cookies.get(Tokens.REFRESH_TOKEN);
+    return this.httpService.post<IAuthResponse>(`${this.baseUrl}auth/refresh`, {
+      refreshToken,
+    });
   }
 
   // authMeRx() {
@@ -47,58 +50,101 @@ export class AuthService {
   //     })
   // }
 
-  async authMe() {
-    this.isLoading$.next(true)
+  // async authAllProfiles() {
+  //
+  // }
+
+  async authMe(): Promise<IAuthResponse | void> {
+    this.isLoading$.next(true);
 
     try {
-      const response = await this.httpService.get<IAuthResponse>(`${this.baseUrl}auth/me`).toPromise()
+      const response = await this.httpService
+        .get<IAuthResponse>(`${this.baseUrl}auth/me`)
+        .toPromise();
 
       if (response?.tokens && response.user) {
-        this.isLoggedIn = true
-        this.cookieService.saveTokenStorage(response.tokens)
-        this.userService.setUserData(response.user)
-        await this.categoryService.getCategories()
+        this.isLoggedIn = true;
+        this.cookieService.saveTokenStorage(response.tokens);
+        this.userService.setUserData(response.user);
+        await this.categoryService.getCategories();
+        return response && response;
       }
     } catch (error) {
     } finally {
-      this.isLoading$.next(false)
-      this.isAuth = true
+      this.isLoading$.next(false);
+      this.isAuth = true;
+    }
+  }
+
+  async getAvailableAccounts() {
+    const allTokens: ITokens[] =
+      this.localStorageService.getItemFromLocalStorage(
+        Tokens.AVAILABLE_ACCOUNTS
+      )['tokens'];
+
+    try {
+      const response = await this.httpService
+        .post<{ value: IAuthResponse }[]>(
+          `${this.baseUrl}auth/get-available-accounts`,
+          {
+            tokens: allTokens,
+          }
+        )
+        .toPromise();
+
+      const usersData = response?.map((u) => u.value);
+
+      if (usersData) {
+        this.userService.users$.next(usersData);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   async registration(data: IAuthRequest) {
     try {
-      const response = await this.httpService.post<IAuthResponse>(`${this.baseUrl}auth/registration`, data).toPromise()
+      const response = await this.httpService
+        .post<IAuthResponse>(`${this.baseUrl}auth/registration`, data)
+        .toPromise();
 
       if (response?.user) {
-        this.cookieService.saveTokenStorage(response.tokens)
-        this.userService.setUserData(response.user)
+        this.cookieService.saveTokenStorage(response.tokens);
+        this.localStorageService.saveAllAvailableTokens({
+          refreshToken: response.tokens.refreshToken,
+          id: response.user.id,
+        });
+        this.userService.setUserData(response.user);
 
-        await this.authMe()
+        await this.authMe();
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   async login(data: IAuthRequest) {
     try {
-      const response = await this.httpService.post<IAuthResponse>(`${this.baseUrl}auth/login`, data).toPromise()
+      const response = await this.httpService
+        .post<IAuthResponse>(`${this.baseUrl}auth/login`, data)
+        .toPromise();
 
       if (response?.user && response.tokens) {
-        this.cookieService.saveTokenStorage(response.tokens)
-        this.userService.setUserData(response.user)
+        this.cookieService.saveTokenStorage(response.tokens);
+        this.localStorageService.saveAllAvailableTokens({
+          refreshToken: response.tokens.refreshToken,
+          id: response.user.id,
+        });
+        this.userService.setUserData(response.user);
 
-        await this.authMe()
+        await this.authMe();
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   logout() {
-    this.isLoggedIn = false
+    this.isLoggedIn = false;
   }
 }

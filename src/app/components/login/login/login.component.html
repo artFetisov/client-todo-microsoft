@@ -1,50 +1,61 @@
 <div class="login">
-  <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="login-form">
+  <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="form">
     <div *ngIf="currentInputFieldName === 'email'">
       <div class="title">Войти</div>
-      <input nz-input placeholder="Электронная почта" formControlName="email"/>
+      <input nz-input placeholder="Электронная почта" formControlName="email" />
       <div *ngIf="email?.invalid && email?.touched" class="error">
-        <div *ngIf="email?.errors">
-          Введите email
-        </div>
-        <div *ngIf="email?.errors">
-          Некорректный email
-        </div>
+        <div *ngIf="email?.errors">Введите email</div>
+        <div *ngIf="email?.errors">Некорректный email</div>
       </div>
       <div class="go-to-reg">
         <span>Нет учетной записи?</span>
-        <a class="link" routerLink="/registration" routerLinkActive="active">Создайте ее!</a>
+        <a class="link" routerLink="/registration" routerLinkActive="active"
+          >Создайте ее!</a
+        >
       </div>
       <div class="buttons">
-        <button [disabled]="email?.invalid" class="btn-to-next" nz-button nzType="primary"
-                (click)="setCurrentInputFieldName('password')">Далее
+        <button
+          class="btn-to-next"
+          nz-button
+          nzType="primary"
+          (click)="toPassword()"
+        >
+          Далее
         </button>
       </div>
     </div>
     <div *ngIf="currentInputFieldName === 'password'">
       <div class="title">Введите пароль</div>
-      <input type="password" nz-input formControlName="password"/>
+      <input type="password" nz-input formControlName="password" />
       <div *ngIf="password?.invalid && password?.touched" class="error">
-        <div *ngIf="password?.errors">
-          Введите пароль
-        </div>
-        <div *ngIf="password?.errors">
-          Минимальная длина пароля 6 символов
-        </div>
+        <div *ngIf="password?.errors">Введите пароль</div>
+        <div *ngIf="password?.errors">Минимальная длина пароля 6 символов</div>
         <div *ngIf="password?.errors">
           Максимальная длина пароля 16 символов
         </div>
       </div>
       <div class="go-to-reg">
         <span>Нет учетной записи?</span>
-        <a class="link" routerLink="/registration" routerLinkActive="active">Создайте ее!</a>
+        <a class="link" routerLink="/registration" routerLinkActive="active"
+          >Создайте ее!</a
+        >
       </div>
       <div class="buttons">
-        <button nz-button (click)="setCurrentInputFieldName('email')">Назад
+        <button nz-button (click)="setCurrentInputFieldName('email')">
+          Назад
         </button>
-        <button class="btn-to-next" nz-button nzType="primary">Войти
-        </button>
+        <button class="btn-to-next" nz-button nzType="primary">Войти</button>
       </div>
     </div>
   </form>
+  <div *ngIf="users$ | async" class="users">
+    <div
+      *ngFor="let user of users$ | async"
+      class="user"
+      (click)="handleAuth(user)"
+    >
+      <span>Войти как </span>
+      <span>{{ user.user.email }}</span>
+    </div>
+  </div>
 </div>
