@@ -1,15 +1,20 @@
 <div class="welcome">
-  <img alt="Welcome image" class="left-image" src="./assets/images/welcome-left.png">
+  <div style="padding: 0 16px;">
+    <img alt="Welcome image" class="left-image" src="./assets/images/welcome-left.png">
+  </div>
   <div class="center-box">
     <div>
       <img alt="Welcome image" class="logo-image" src="./assets/images/logo.png">
     </div>
     <span class="title">Microsoft To Do</span>
-    <h4>To Do поможет вам сосредоточиться на любом занятии - от работы до игры</h4>
+    <p class="p">To Do <span class="bold-text">поможет вам сосредоточиться на любом занятии - от работы до игры</span>
+    </p>
     <button (click)="goToNextPage()" class="btn" nz-button nzType="primary"
             nzSize="large">
       Начало работы
     </button>
   </div>
-  <img alt="Welcome image" class="right-image" src="./assets/images/welcome-right.png">
+  <div style="padding-left: 66px;">
+    <img alt="Welcome image" class="right-image" src="./assets/images/welcome-right.png">
+  </div>
 </div>

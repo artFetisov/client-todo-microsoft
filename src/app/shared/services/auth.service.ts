@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { IAuthRequest, IAuthResponse } from '../data/model/auth';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {IAuthRequest, IAuthResponse} from '../data/model/auth';
 import Cookies from 'js-cookie';
-import { CookieService, Tokens } from './cookie.service';
-import { BehaviorSubject } from 'rxjs';
-import { UserService } from './user.service';
-import { CategoriesService } from '../../modules/categories/services/categories.service';
-import { ITokens } from '../data/model/token';
-import { LocalStorageService } from './local-storage.service';
+import {CookieService, Tokens} from './cookie.service';
+import {BehaviorSubject} from 'rxjs';
+import {UserService} from './user.service';
+import {CategoriesService} from '../../modules/categories/services/categories.service';
+import {ITokens} from '../data/model/token';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,8 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly categoryService: CategoriesService,
     private readonly localStorageService: LocalStorageService
-  ) {}
+  ) {
+  }
 
   baseUrl = environment.baseUrl;
   isAuth = false;
@@ -77,6 +78,7 @@ export class AuthService {
   }
 
   async getAvailableAccounts() {
+    this.isLoading$.next(true);
     const allTokens: ITokens[] =
       this.localStorageService.getItemFromLocalStorage(
         Tokens.AVAILABLE_ACCOUNTS
@@ -99,6 +101,8 @@ export class AuthService {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      this.isLoading$.next(false);
     }
   }
 
