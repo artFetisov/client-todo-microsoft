@@ -45,6 +45,8 @@ export class LocalStorageService {
     let updatedTokens: AvailableAccountsData[];
 
     if (!!allTokensFromStorage && allTokensFromStorage.length > 0) {
+      console.log(tokens.refreshToken)
+      console.log(allTokensFromStorage.filter((t) => t.id === tokens.id))
       updatedTokens = [
         ...allTokensFromStorage.filter((t) => t.id !== tokens.id),
         tokens,
@@ -52,6 +54,7 @@ export class LocalStorageService {
     } else {
       updatedTokens = [tokens];
     }
+    console.log(updatedTokens)
 
     this.savetoLocalStorage(Tokens.AVAILABLE_ACCOUNTS, {
       tokens: updatedTokens,

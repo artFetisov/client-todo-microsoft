@@ -2,7 +2,7 @@
   <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="form">
     <div *ngIf="currentInputFieldName === 'email'">
       <div class="title">Войти</div>
-      <input nz-input placeholder="Электронная почта" formControlName="email" />
+      <input nz-input placeholder="Электронная почта" formControlName="email"/>
       <div *ngIf="email?.invalid && email?.touched" class="error">
         <div *ngIf="email?.errors">Введите email</div>
         <div *ngIf="email?.errors">Некорректный email</div>
@@ -10,7 +10,7 @@
       <div class="go-to-reg">
         <span>Нет учетной записи?</span>
         <a class="link" routerLink="/registration" routerLinkActive="active"
-          >Создайте ее!</a
+        >Создайте ее!</a
         >
       </div>
       <div class="buttons">
@@ -26,7 +26,7 @@
     </div>
     <div *ngIf="currentInputFieldName === 'password'">
       <div class="title">Введите пароль</div>
-      <input type="password" nz-input formControlName="password" />
+      <input type="password" nz-input formControlName="password"/>
       <div *ngIf="password?.invalid && password?.touched" class="error">
         <div *ngIf="password?.errors">Введите пароль</div>
         <div *ngIf="password?.errors">Минимальная длина пароля 6 символов</div>
@@ -37,7 +37,7 @@
       <div class="go-to-reg">
         <span>Нет учетной записи?</span>
         <a class="link" routerLink="/registration" routerLinkActive="active"
-          >Создайте ее!</a
+        >Создайте ее!</a
         >
       </div>
       <div class="buttons">
@@ -48,14 +48,20 @@
       </div>
     </div>
   </form>
-  <div *ngIf="users$ | async" class="users">
+  <div *ngIf="(users$ | async)?.length" class="users">
+    <div class="info">
+      Мы обнаружили учетные записи, которые вы можете использовать:
+    </div>
     <div
       *ngFor="let user of users$ | async"
       class="user"
       (click)="handleAuth(user)"
     >
-      <span>Войти как </span>
-      <span>{{ user.user.email }}</span>
+      <nz-avatar [nzSize]="48" nzIcon="user"></nz-avatar>
+      <div class="user-data">
+        <div>{{ user.user.email }}</div>
+        <div class="small">Вход выполнен</div>
+      </div>
     </div>
   </div>
 </div>

@@ -22,6 +22,7 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {RegistrationComponent} from './components/registration/registration.component';
 import {NzSpinModule} from "ng-zorro-antd/spin";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
 
 registerLocaleData(localeRu);
 
@@ -33,21 +34,22 @@ registerLocaleData(localeRu);
     WelcomeComponent,
     RegistrationComponent
   ],
-  imports: [
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    CategoriesModule,
-    CoreModule,
-    NzLayoutModule,
-    NzGridModule,
-    NzButtonModule,
-    NzInputModule,
-    NzSpinModule
-  ],
+    imports: [
+        ReactiveFormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        CategoriesModule,
+        CoreModule,
+        NzLayoutModule,
+        NzGridModule,
+        NzButtonModule,
+        NzInputModule,
+        NzSpinModule,
+        NzAvatarModule
+    ],
   providers: [
     {provide: NZ_I18N, useValue: en_US},
     {

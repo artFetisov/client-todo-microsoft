@@ -13,7 +13,7 @@ import {CookieService} from 'src/app/shared/services/cookie.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  users$!: Observable<IAuthResponse[] | null>;
+  users$: Observable<IAuthResponse[]>;
   currentInputFieldName: 'email' | 'password' = 'email';
 
   constructor(
